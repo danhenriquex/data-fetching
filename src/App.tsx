@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useFecth } from "./hooks/useFetch";
+import { useQuery } from "react-query";
+import { Route, Routes } from "react-router-dom";
+import { Repos } from "./pages/Repos";
+import { Repo } from "./pages/Repo";
 
 type Repository = {
   full_name: string;
@@ -8,25 +12,14 @@ type Repository = {
 };
 
 function App() {
-  const { data: repositories, isFetching } = useFecth<Repository[]>(
-    "/diego3g/repos"
-  );
+  // const { data: repositories, isFetching } =
+  //   useFecth<Repository[]>("/diego3g/repos");
 
   return (
-    <ul>
-      {isFetching ? (
-        <div>loading...</div>
-      ) : (
-        repositories?.map((repo) => {
-          return (
-            <li key={repo.full_name}>
-              <strong>{repo.full_name}</strong>
-              <p>{repo.description}</p>
-            </li>
-          );
-        })
-      )}
-    </ul>
+    <Routes>
+      <Route path="/" element={<Repos />} />
+      <Route path="/repos/*" element={<Repo />} />
+    </Routes>
   );
 }
 
