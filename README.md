@@ -1,1 +1,1 @@
-Learning best aways to data fetching with react query
+Learning best aways to data fetching with react query!
